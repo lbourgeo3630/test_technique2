@@ -5,9 +5,12 @@ import com.example.test_technique.dto.PersonneDTO;
 import com.example.test_technique.mapper.PersonneMapper;
 import com.example.test_technique.service.PersonneService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping("/test")
@@ -31,13 +34,15 @@ public class PersonneControleur {
      * @return
      */
     @PostMapping
-    public ResponseEntity<Personne> postTest(@RequestParam(name = "name") String name,
-                                             @RequestParam(name = "age") String age){
+    public ResponseEntity<Personne> postTest(@RequestParam(name = "nom") String nom,
+                                             @RequestParam(name = "prenom") String prenom,
+                                             @RequestParam(name = "dateNaissance") Date dateNaissance){
         System.out.println("Appel methode post");
 
         Personne personneAEnregistrer = personneMapper.toEntity(PersonneDTO.builder()
-                .age(age)
-                .name(name)
+                .prenom(prenom)
+                .nom(nom)
+                .dateNaissance(dateNaissance)
                 .build());
         Personne personneRetournee = testService.creer(personneAEnregistrer);
         return ResponseEntity.status(HttpStatus.CREATED).body(personneRetournee);

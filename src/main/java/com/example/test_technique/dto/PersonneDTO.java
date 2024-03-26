@@ -5,14 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
 public class PersonneDTO {
 
-    private String name;
+    private String nom;
 
-    private String age;
+    private String prenom;
+
+    private Date dateNaissance;
 
 }

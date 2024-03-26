@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.UUID;
+
 @Entity
 @Data
 @Table(name = "personne")
@@ -18,11 +21,14 @@ public class Personne {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Long id;
+    private UUID id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "nom")
+    private String nom;
 
-    @Column(name = "age")
-    private String age;
+    @Column(name = "prenom")
+    private String prenom;
+
+    @Column(name = "date_naissance")
+    private Date dateNaissance;
 }

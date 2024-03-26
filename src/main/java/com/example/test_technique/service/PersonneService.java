@@ -11,7 +11,7 @@ public class PersonneService {
 
     private final PersonneRepository personneRepository;
     public Personne creer(final Personne personne) {
-        System.out.println("Création " + personne.getName() + " agé de " + personne.getAge() + " ans.");
+        System.out.println("Création " + personne.getNom() + " agé de " + personne.getPrenom() + " ans.");
         return this.personneRepository.saveAndFlush(personne);
     }
 
