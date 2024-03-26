@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -30,5 +31,5 @@ public class Personne {
     private String prenom;
 
     @Column(name = "date_naissance")
-    private Date dateNaissance;
+    private LocalDate dateNaissance;
 }

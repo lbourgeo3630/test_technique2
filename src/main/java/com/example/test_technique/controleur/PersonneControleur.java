@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @RestController
@@ -29,14 +30,16 @@ public class PersonneControleur {
     /**
      * Methode qui permet d'enregistrer une personne
      *
-     * @param name
-     * @param age
-     * @return
+     * @param nom
+     * @param prenom
+     * @param dateNaissance
+     *
+     * @return Personne
      */
     @PostMapping
     public ResponseEntity<Personne> postTest(@RequestParam(name = "nom") String nom,
                                              @RequestParam(name = "prenom") String prenom,
-                                             @RequestParam(name = "dateNaissance") Date dateNaissance){
+                                             @RequestParam(name = "dateNaissance") LocalDate dateNaissance){
         System.out.println("Appel methode post");
 
         Personne personneAEnregistrer = personneMapper.toEntity(PersonneDTO.builder()
@@ -44,7 +47,11 @@ public class PersonneControleur {
                 .nom(nom)
                 .dateNaissance(dateNaissance)
                 .build());
-        Personne personneRetournee = testService.creer(personneAEnregistrer);
-        return ResponseEntity.status(HttpStatus.CREATED).body(personneRetournee);
+        try {
+            Personne personneRetournee = testService.creer(personneAEnregistrer);
+            return ResponseEntity.status(HttpStatus.CREATED).body(personneRetournee);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(personneAEnregistrer);
+        }
     }
 }
